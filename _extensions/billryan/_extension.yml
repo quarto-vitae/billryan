@@ -1,0 +1,46 @@
+title: Résumé
+author: Mitchell O'Hara-Wild
+version: 0.1.0
+quarto-required: ">=1.7.0"
+contributes:
+  formats:
+    pdf:
+      # fontspec needs a Unicode engine, for TeX Gyre Termes and for CJK
+      # support. Upstream's own TS-program line specifies xelatex.
+      pdf-engine: xelatex
+      template: resume.tex
+      template-partials:
+        - resume-preamble.tex
+      documentclass: resume
+      papersize: a4
+      fontsize: 11pt
+      # resume.cls already sets `hidelinks`, marking contacts by icon rather
+      # than colour, the same convention every quarto-vitae template follows.
+      # Quarto's pdf format defaults this to true, which would fight that.
+      colorlinks: false
+      # Copied next to the generated .tex so LaTeX can find it. The entries/
+      # directory is deliberately absent: resources are copied after pandoc
+      # runs, so a handler listed here would resolve only on a second render.
+      # The filter reads _extensions/**/entries/ directly.
+      format-resources:
+        - resume.cls
+      # Default knitr engine printing data directly as a markdown table.
+      df-print: kable
+      # Provided by the embedded copy of quarto-vitae/curriculum, under
+      # _extensions/quarto-vitae/curriculum. Filters are matched by the
+      # embedded extension's directory name (its extension id), not by the
+      # Lua filter's filename -- so this must say "curriculum", matching
+      # quarto-vitae/curriculum's own directory name, not "vitae-entries".
+      # Refresh with:
+      #   quarto update quarto-vitae/curriculum --embed billryan
+      filters:
+        - curriculum
+        # No heading-remap filter is needed here, unlike awesomecv's
+        # awesome-cv.lua: resume.cls's \titleformat restyles LaTeX's own
+        # \section/\subsection in place rather than renaming them the way
+        # Awesome-CV's \cvsection/\cvsubsection do, so Pandoc's default
+        # Header -> \section/\subsection -> conversion already lands on
+        # upstream's styling with nothing extra in the pipeline.
+      # Style names this template implements, for the filter's fallback warning.
+      vitae:
+        styles: [detailed, brief, skills]

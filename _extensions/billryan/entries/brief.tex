@@ -1,0 +1,6 @@
+$-- One dated line per entry, closely matching upstream's own Honors-and-Awards
+$-- usage: \datedline{\textbf{title}, organisation}{date}. `why` is
+$-- deliberately ignored -- a listing that needs it wants the `detailed` style.
+$for(entries)$
+\datedline{\textbf{$entries.what$}$if(entries.with)$, $entries.with$$endif$}{$entries.when$}
+$endfor$

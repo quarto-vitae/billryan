@@ -1,0 +1,61 @@
+$resume-preamble.tex()$
+
+\begin{document}
+
+%-------------------------------------------------------------------------------
+%	HEADER
+%-------------------------------------------------------------------------------
+% LOCAL: resume.cls's \name takes one string rather than awesome-cv.cls's
+% \name{firstname}{lastname}, so `surname` (when given) is folded into it here
+% rather than exposed as a second class argument. Documented in the README.
+\name{$name$$if(surname)$ $surname$$endif$}
+
+$if(position)$
+% No upstream equivalent -- upstream's own examples put a role only in
+% \role{} beside an entry, never under the name. Set plainly, the same size as
+% the contact line it sits above, so it reads as a subtitle rather than an entry.
+{\centering\normalsize $position$\par}
+\vspace{0.5ex}
+$endif$
+
+% Built from whichever of phone/email/www/github/linkedin the document sets,
+% each drawn through resume.cls's fontawesome5-based macros and separated by
+% \rescontactsep -- see the LOCAL note on \rescontact in resume.cls.
+\basicInfo{%
+$if(phone)$\rescontact{\phone{$phone$}}$endif$
+$if(email)$\rescontact{\email{$email$}}$endif$
+$if(www)$\rescontact{\homepage{$www$}}$endif$
+$if(github)$\rescontact{\github{$github$}}$endif$
+$if(linkedin)$\rescontact{\linkedin{$linkedin$}}$endif$
+}
+
+%-------------------------------------------------------------------------------
+%	RESUME CONTENT
+%	Each section is written as a heading in the .qmd; resume.cls's own
+%	\titleformat restyles \section/\subsection directly (see README), so no
+%	heading-remapping filter is needed here the way awesome-cv.lua provides one.
+%-------------------------------------------------------------------------------
+$if(linestretch)$
+\setstretch{$linestretch$}
+$endif$
+
+$for(include-before)$
+$include-before$
+$endfor$
+
+$body$
+
+$before-bib.tex()$
+
+$if(nocite-ids)$
+\nocite{$for(nocite-ids)$$it$$sep$, $endfor$}
+$endif$
+$biblio.tex()$
+
+$for(include-after)$
+$include-after$
+$endfor$
+
+$after-body.tex()$
+
+\end{document}

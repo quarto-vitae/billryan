@@ -1,0 +1,8 @@
+$-- A category paired with its members, one bullet per row, matching upstream's
+$-- own plain Skills section (`\item Programming Languages: ...`). Members are
+$-- given either as one string in `with` or as a list in `why`; a list is
+$-- joined with commas, since upstream's own line is running text, not bullets
+$-- within bullets.
+\begin{itemize}[parsep=0.5ex]
+$for(entries)$  \item \textbf{$entries.what$}: $if(entries.with)$$entries.with$$else$$for(entries.why)$$entries.why$$sep$, $endfor$$endif$
+$endfor$\end{itemize}

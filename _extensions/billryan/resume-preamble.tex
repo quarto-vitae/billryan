@@ -1,0 +1,67 @@
+%!TEX TS-program = xelatex
+%!TEX encoding = UTF-8 Unicode
+% Résumé LaTeX Template
+%
+% This template has been downloaded from:
+% https://github.com/billryan/resume
+%
+% Author:
+% Bin "Bill" Yuan <yuanbin2014@gmail.com>
+%
+% Adapted to be a Quarto template by Mitchell O'Hara-Wild
+%
+% Template license:
+% CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/)
+%
+% Everything before \begin{document}: class options, the accent colour, the
+% personal information that fills the header, and Pandoc's own preamble.
+%-------------------------------------------------------------------------------
+% CONFIGURATIONS
+%-------------------------------------------------------------------------------
+$passoptions.latex()$
+%
+% A4 paper size by default, use 'letterpaper' for US letter
+$doc-class.tex()$
+
+% Configure page margins with geometry. The class has already loaded the
+% package, so these are set with \geometry rather than as package options.
+$if(geometry)$
+\geometry{$for(geometry)$$geometry$$sep$,$endfor$}
+$endif$
+
+% LOCAL: no upstream equivalent -- upstream has no accent colour beyond black.
+% `headcolor` is the same option name every other quarto-vitae template uses
+% for its accent, applied here to the title rule and to every entry's
+% flush-right date (see resume.cls). Left alone, the class's own black
+% default stands.
+$if(headcolor)$
+\definecolor{accent}{HTML}{$headcolor$}
+$endif$
+
+%-------------------------------------------------------------------------------
+%	PANDOC SUPPORT
+%-------------------------------------------------------------------------------
+% common.latex is required in every custom Quarto LaTeX template, and calls
+% pandoc.tex, which in turn brings in syntax highlighting, tables.tex,
+% graphics.tex, citations.tex, babel-lang.tex, tightlist.tex, biblio-config.tex
+% and header-includes. Do not hand-copy any of those: they are Pandoc's to
+% maintain, and a stale local copy silently drifts out of step with the reader.
+$common.latex()$
+$after-header-includes.latex()$
+$hypersetup.latex()$
+
+% Typography. font-settings.latex honours mainfont/sansfont/monofont and their
+% *options and *fallback variants, so a user changes the résumé's fonts the
+% same way they would in any other Quarto pdf. It runs after the class's own
+% \setmainfont{TeX Gyre Termes} above, so a `mainfont` here wins. fonts.latex
+% is NOT called: it would load lmodern and unicode-math over the top of what
+% the class has already set up. \basicInfo sets the contact line in \sffamily
+% regardless of mainfont, exactly as upstream does; give `sansfont` to change
+% that line's face without touching the body.
+$font-settings.latex()$
+
+% Four further partials are deliberately not called here:
+%   fonts.latex  see above.
+%   before-title.tex, title.tex, before-body.tex, toc.tex  a résumé has no
+%     title block or contents page; \name/\basicInfo below play that role, and
+%     \section here writes no \addcontentsline, so a toc would be empty.

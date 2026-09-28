@@ -1,0 +1,16 @@
+$-- A subsection per entry, matching upstream's own Education/Experience usage
+$-- in resume.tex: \datedsubsection{\textbf{institution}, location}{dates}, an
+$-- italic \role line for the specific title, and a bulleted elaboration from
+$-- `why`. `where` is optional, since a subsection reads fine as institution
+$-- alone; when present it follows the institution after a comma, exactly as
+$-- upstream writes it by hand.
+$for(entries)$
+\datedsubsection{\textbf{$entries.with$}$if(entries.where)$, $entries.where$$endif$}{$entries.when$}
+\role{$entries.what$}{}
+$if(entries.why)$
+\begin{itemize}
+$for(entries.why)$  \item $entries.why$
+$endfor$\end{itemize}
+$endif$
+
+$endfor$

@@ -34,8 +34,9 @@ Set the format and describe yourself in the YAML header:
 name: Marie
 surname: Curie
 position: "Physicist and Chemist"
-email: "marie.curie@example.org"
-github: mcurie
+social:
+  - email: marie.curie@example.org
+  - github: mcurie
 format: billryan-pdf
 ---
 ```
@@ -119,7 +120,7 @@ Set these in the YAML header. All are optional except `name`.
 |--------|--------|
 | `name`, `surname` | The name shown in the header. Upstream's `\name` takes a single string, so `surname` (when given) is folded into it as `name surname`; write the whole thing in `name` if you would rather control the spacing yourself. |
 | `position` | A subtitle under the name |
-| `phone`, `email`, `www`, `github`, `linkedin` | Contact details, drawn with a FontAwesome icon each and separated by a centred dot, as upstream's own `\basicInfo` line does by hand |
+| `social` | A list of contact details, each written as `service: value` (`email`, `phone`, `website`, `github`, `linkedin`, `mastodon`, and more; `custom` takes an `icon` and `text`). Drawn in the order written, with a FontAwesome icon each, separated by a centred dot |
 
 ### Appearance
 

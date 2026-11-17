@@ -118,29 +118,14 @@
   {\large\scshape{#1}}
 }
 
-% LOCAL: upstream's contact macros each take an already-built URL (plus an
-% optional display label), e.g. \linkedin[billryan8]{https://...}. These
-% instead take the bare value the way `email`/`phone`/`www`/`github`/
-% `linkedin` are written in quarto-vitae front matter -- the same values
-% awesome-cv.cls and latexcv-preamble.tex take -- and build the href
-% themselves, so the class matches the org's YAML vocabulary rather than
-% upstream's own macro arity.
+% LOCAL: upstream's contact macros (\email, \phone, \github, ...) each build
+% one service's link by hand. These are replaced by one generic macro, since
+% quarto-vitae's `social` front matter is normalised by the curriculum filter
+% into icon, url and label for every service.
 %
-% defines one's email
-% usage: \email{<email>}
-\newcommand{\email}[1]{\faIcon{envelope}\ \href{mailto:#1}{#1}}
-% defines one's phone
-% usage: \phone{<phone>}
-\newcommand{\phone}[1]{\faIcon{phone-alt}\ {#1}}
-% defines one's homepage
-% usage: \homepage{<homepage>}
-\newcommand{\homepage}[1]{\faIcon{home}\ \href{https://#1}{#1}}
-% defines one's GitHub
-% usage: \github{<github-nick>}
-\newcommand{\github}[1]{\faIcon{github}\ \href{https://github.com/#1}{#1}}
-% defines one's linkedin
-% usage: \linkedin{<linkedin-nick>}
-\newcommand{\linkedin}[1]{\faIcon{linkedin}\ \href{https://www.linkedin.com/in/#1}{#1}}
+% usage: \ressocial{<fontawesome icon>}{<url, may be empty>}{<label>}
+\newcommand{\ressocial}[3]{%
+  \faIcon{#1}\ \ifx\relax#2\relax#3\else\href{#2}{#3}\fi}
 
 \newcommand{\basicInfo}[1]{
   \centerline{\sffamily\large{#1}}
@@ -153,7 +138,7 @@
 }
 
 % LOCAL: no upstream equivalent. Builds the `\basicInfo` contact line from
-% whichever of phone/email/www/github/linkedin are set, joined by
+% the `social` items, joined by
 % \rescontactsep, the same way awesome-cv.cls's \acvHeaderSocialSep and
 % latexcv-preamble.tex's \cvcontactsep separate an optional set of fields.
 % resume-preamble.tex calls \rescontact once per field present; this file only

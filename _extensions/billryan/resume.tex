@@ -18,15 +18,14 @@ $if(position)$
 \vspace{0.5ex}
 $endif$
 
-% Built from whichever of phone/email/www/github/linkedin the document sets,
-% each drawn through resume.cls's fontawesome5-based macros and separated by
-% \rescontactsep -- see the LOCAL note on \rescontact in resume.cls.
+% Built from the normalised `social` list (see the curriculum filter), one
+% \rescontact per item, drawn through resume.cls's fontawesome5-based
+% \ressocial and separated by \rescontactsep. fontawesome5 predates a few
+% icons the filter defaults to, so those are swapped for the nearest it has.
 \basicInfo{%
-$if(phone)$\rescontact{\phone{$phone$}}$endif$
-$if(email)$\rescontact{\email{$email$}}$endif$
-$if(www)$\rescontact{\homepage{$www$}}$endif$
-$if(github)$\rescontact{\github{$github$}}$endif$
-$if(linkedin)$\rescontact{\linkedin{$linkedin$}}$endif$
+$for(social)$
+\rescontact{\ressocial{$if(social.is.address)$map-marker-alt$elseif(social.is.googlescholar)$graduation-cap$elseif(social.is.bluesky)$cloud$elseif(social.is.x)$twitter$else$$social.icon$$endif$}{$social.url$}{$social.label$}}
+$endfor$
 }
 
 %-------------------------------------------------------------------------------

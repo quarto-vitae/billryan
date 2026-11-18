@@ -1,4 +1,4 @@
-# Résumé
+# billryan: an elegant XeLaTeX résumé format for Quarto
 
 A Quarto format for writing a CV with [billryan/resume](https://github.com/billryan/resume),
 an elegant XeLaTeX résumé template by Bin "Bill" Yuan, known for its
